@@ -492,7 +492,7 @@ const Hero: React.FC = () => {
                   <span>Projects</span>
                 </Stat>
                 <Stat>
-                  <StatValue>5+</StatValue>
+                  <StatValue>2+</StatValue>
                   <span>Years Exp</span>
                 </Stat>
               </ProfileStats>
