@@ -47,10 +47,25 @@ npm run build
 ## Configuration
 
 ### Vite Configuration
-- Base URL: `/` (for GitHub Pages)
+- Base URL: `/your-repo-name/` (for GitHub Pages in subdirectory)
 - Build output: `/dist`
 - Source maps enabled for debugging
 - Code splitting for better performance
+
+**⚠️ Important**: If your repository name is not your GitHub username (e.g., `jackson_web_portfolio` instead of just `jackson951`), you MUST update the base URL in `vite.config.ts`:
+
+```typescript
+// For repository: https://github.com/username/repo-name
+export default defineConfig({
+  base: '/repo-name/', // Update this to match your repo name
+  // ...
+})
+```
+
+**Common Issues**:
+- **404 errors on assets**: Update base URL to include your repo name
+- **Blank page**: Check that base URL matches your GitHub Pages URL structure
+- **Manifest/favicon errors**: Update paths in `index.html` to include repo name
 
 ### GitHub Actions Workflow
 - **Trigger**: Push to `main`/`master` or pull requests
