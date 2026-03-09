@@ -15,13 +15,20 @@ git push -u origin main
 ```
 
 ### 2. Enable GitHub Pages
+
+#### Option A: GitHub Actions (Recommended)
 1. Go to your repository on GitHub
 2. Click on **Settings** → **Pages**
 3. Under **Source**, select **GitHub Actions**
 4. Click **Save**
+5. Your site will deploy automatically to: `https://your-username.github.io/your-repo-name`
 
-### 3. Automatic Deployment
-The deployment is now automated! Every push to the `main` or `master` branch will trigger a deployment.
+#### Option B: gh-pages Branch
+1. Go to your repository on GitHub
+2. Click on **Settings** → **Pages**
+3. Under **Source**, select **gh-pages branch**
+4. Click **Save**
+5. The `deploy-gh-pages.yml` workflow will create and update the `gh-pages` branch automatically
 
 ## Manual Deployment
 
