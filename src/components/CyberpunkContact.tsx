@@ -390,7 +390,7 @@ const CyberpunkContact: React.FC = () => {
                 <FiMail />
               </ContactIcon>
               <ContactLabel>
-                <h3>Direct Line</h3>
+                <h3>E-mail</h3>
                 <p>jacksonkhuto591@gmail.com</p>
               </ContactLabel>
             </ContactItem>
@@ -403,7 +403,7 @@ const CyberpunkContact: React.FC = () => {
                 <FiPhone />
               </ContactIcon>
               <ContactLabel>
-                <h3>Signal Channel</h3>
+                <h3>Phone</h3>
                 <p>+27 66 180 2747</p>
               </ContactLabel>
             </ContactItem>

@@ -239,7 +239,7 @@ const Skills: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            Cybernetic Skill Matrix
+            Skill Matrix
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
