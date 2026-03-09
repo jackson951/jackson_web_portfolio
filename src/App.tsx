@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from './components/ThemeContext'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
-import About from './pages/About'
+import CyberpunkAbout from './pages/CyberpunkAbout'
 import ProjectsPage from './pages/ProjectsPage'
 import ContactPage from './pages/ContactPage'
 import './App.css'
@@ -15,7 +15,7 @@ const App: React.FC = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<CyberpunkAbout />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>

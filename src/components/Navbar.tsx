@@ -10,17 +10,19 @@ const NavbarContainer = styled(motion.nav)`
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(15, 23, 42, 0.8);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(30, 27, 75, 0.9));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid rgba(255, 0, 255, 0.3);
   z-index: 1000;
   padding: 1rem 0;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(255, 0, 255, 0.2);
 
   &[data-scrolled="true"] {
-    background: rgba(15, 23, 42, 0.95);
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(30, 27, 75, 0.95));
     padding: 0.5rem 0;
+    box-shadow: 0 8px 30px rgba(255, 0, 255, 0.3);
   }
 `
 
@@ -31,31 +33,39 @@ const NavContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+  position: relative;
 `
 
 const Logo = styled(Link)`
   font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-weight: 800;
+  color: #fff;
   text-decoration: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Inter', sans-serif;
   position: relative;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   
   span {
-    color: var(--terminal-green);
-    font-weight: 800;
-    text-shadow: 0 0 10px rgba(46, 160, 67, 0.5);
+    background: linear-gradient(135deg, #ff00ff, #00f5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    animation: neon-flicker 2s infinite;
   }
   
   &::after {
     content: '>';
     position: absolute;
     right: -25px;
-    color: var(--terminal-green);
+    color: #ff00ff;
     animation: blink 1s infinite;
+    font-size: 1.2rem;
   }
   
   @keyframes blink {
@@ -66,7 +76,7 @@ const Logo = styled(Link)`
 
 const NavLinks = styled.div`
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
 
   @media (max-width: 768px) {
@@ -74,25 +84,33 @@ const NavLinks = styled.div`
   }
 `
 
-const NavLink = styled(Link)<{ active?: boolean }>`
-  color: ${props => props.active ? 'var(--accent-color)' : 'var(--text-secondary)'};
+const NavLink = styled(motion(Link))<{ active?: boolean }>`
+  color: #94a3b8;
   text-decoration: none;
   font-weight: 500;
   position: relative;
   transition: color 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
   
   &:hover {
-    color: var(--accent-color);
+    color: #fff;
+    border-color: rgba(255, 0, 255, 0.3);
+    background: rgba(255, 0, 255, 0.1);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
   }
   
   &::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -2px;
     left: 0;
     width: ${props => props.active ? '100%' : '0'};
-    height: 2px;
-    background-color: var(--accent-color);
+    height: 3px;
+    background: linear-gradient(90deg, #ff00ff, #00f5ff);
+    border-radius: 2px;
     transition: width 0.3s ease;
   }
   
@@ -101,10 +119,10 @@ const NavLink = styled(Link)<{ active?: boolean }>`
   }
 `
 
-const ThemeToggle = styled.button`
-  background: none;
-  border: none;
-  color: var(--text-secondary);
+const ThemeToggle = styled(motion.button)`
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 245, 255, 0.1));
+  border: 1px solid rgba(255, 0, 255, 0.3);
+  color: #ff00ff;
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 50%;
@@ -112,26 +130,32 @@ const ThemeToggle = styled.button`
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 0, 255, 0.2);
   
   &:hover {
-    background: var(--card-bg);
-    color: var(--text-primary);
+    background: linear-gradient(135deg, #ff00ff, #00f5ff);
+    color: #0f172a;
+    box-shadow: 0 8px 25px rgba(255, 0, 255, 0.5);
+    transform: translateY(-2px);
   }
 `
 
-const MobileMenuButton = styled.button`
+const MobileMenuButton = styled(motion.button)`
   display: none;
-  background: none;
-  border: none;
-  color: var(--text-secondary);
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 245, 255, 0.1));
+  border: 1px solid rgba(255, 0, 255, 0.3);
+  color: #ff00ff;
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 50%;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 0, 255, 0.2);
   
   &:hover {
-    background: var(--card-bg);
-    color: var(--text-primary);
+    background: linear-gradient(135deg, #ff00ff, #00f5ff);
+    color: #0f172a;
+    box-shadow: 0 8px 25px rgba(255, 0, 255, 0.5);
+    transform: translateY(-2px);
   }
   
   @media (max-width: 768px) {
@@ -144,27 +168,56 @@ const MobileMenu = styled(motion.div)`
   top: 70px;
   left: 0;
   right: 0;
-  background: var(--bg-color);
-  border-top: 1px solid var(--border-color);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(30, 27, 75, 0.95));
+  border-top: 1px solid rgba(255, 0, 255, 0.3);
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   z-index: 999;
+  backdrop-filter: blur(10px);
 `
 
-const MobileNavLink = styled(Link)<{ active?: boolean }>`
-  color: ${props => props.active ? 'var(--accent-color)' : 'var(--text-secondary)'};
+const MobileNavLink = styled(motion(Link))<{ active?: boolean }>`
+  color: #94a3b8;
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
   padding: 1rem 0;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid rgba(255, 0, 255, 0.2);
   transition: color 0.3s ease;
+  font-family: 'Inter', sans-serif;
   
   &:hover {
-    color: var(--accent-color);
+    color: #fff;
   }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: ${props => props.active ? 'linear-gradient(135deg, #ff00ff, #00f5ff)' : 'transparent'};
+    border-radius: 50%;
+  }
+`
+
+const CyberGrid = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255, 0, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
 `
 
 const Navbar: React.FC = () => {
@@ -198,23 +251,62 @@ const Navbar: React.FC = () => {
         animate={{ y: 0 }}
         transition={{ type: 'spring', stiffness: 100, damping: 20 }}
       >
+        <CyberGrid />
         <NavContent>
           <Logo to="/" onClick={closeMobileMenu}>
-            <span>JK</span>
+            <span>JXN</span>
           </Logo>
           
           <NavLinks>
-            <NavLink to="/" active={location.pathname === '/'}>Home</NavLink>
-            <NavLink to="/about" active={location.pathname === '/about'}>About</NavLink>
-            <NavLink to="/projects" active={location.pathname === '/projects'}>Projects</NavLink>
-            <NavLink to="/contact" active={location.pathname === '/contact'}>Contact</NavLink>
+            <NavLink 
+              to="/" 
+              active={location.pathname === '/'} 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Home
+            </NavLink>
+            <NavLink 
+              to="/about" 
+              active={location.pathname === '/about'} 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              About
+            </NavLink>
+            <NavLink 
+              to="/projects" 
+              active={location.pathname === '/projects'} 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Archive
+            </NavLink>
+            <NavLink 
+              to="/contact" 
+              active={location.pathname === '/contact'} 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Contact
+            </NavLink>
           </NavLinks>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <ThemeToggle onClick={toggleTheme} aria-label="Toggle theme">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', position: 'relative', zIndex: 2 }}>
+            <ThemeToggle 
+              onClick={toggleTheme} 
+              aria-label="Toggle theme"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
               {theme === 'dark' ? <FiSun size={20} /> : <FiMoon size={20} />}
             </ThemeToggle>
-            <MobileMenuButton onClick={toggleMobileMenu} aria-label="Toggle mobile menu">
+            <MobileMenuButton 
+              onClick={toggleMobileMenu} 
+              aria-label="Toggle mobile menu"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
               {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
             </MobileMenuButton>
           </div>
@@ -229,16 +321,40 @@ const Navbar: React.FC = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <MobileNavLink to="/" active={location.pathname === '/'} onClick={closeMobileMenu}>
+            <MobileNavLink 
+              to="/" 
+              active={location.pathname === '/'} 
+              onClick={closeMobileMenu}
+              whileHover={{ x: 10 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Home
             </MobileNavLink>
-            <MobileNavLink to="/about" active={location.pathname === '/about'} onClick={closeMobileMenu}>
+            <MobileNavLink 
+              to="/about" 
+              active={location.pathname === '/about'} 
+              onClick={closeMobileMenu}
+              whileHover={{ x: 10 }}
+              whileTap={{ scale: 0.95 }}
+            >
               About
             </MobileNavLink>
-            <MobileNavLink to="/projects" active={location.pathname === '/projects'} onClick={closeMobileMenu}>
-              Projects
+            <MobileNavLink 
+              to="/projects" 
+              active={location.pathname === '/projects'} 
+              onClick={closeMobileMenu}
+              whileHover={{ x: 10 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Archive
             </MobileNavLink>
-            <MobileNavLink to="/contact" active={location.pathname === '/contact'} onClick={closeMobileMenu}>
+            <MobileNavLink 
+              to="/contact" 
+              active={location.pathname === '/contact'} 
+              onClick={closeMobileMenu}
+              whileHover={{ x: 10 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Contact
             </MobileNavLink>
           </MobileMenu>
