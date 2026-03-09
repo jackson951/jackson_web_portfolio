@@ -138,7 +138,7 @@ const ProjectCard = styled(motion.div)`
   }
 `
 
-const ProjectHeader = styled.div`
+const ProjectHeader = styled.div<{ image?: string }>`
   position: relative;
   height: 200px;
   background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 245, 255, 0.2));
@@ -148,6 +148,13 @@ const ProjectHeader = styled.div`
   color: white;
   font-size: 4rem;
   overflow: hidden;
+  
+  ${props => props.image && `
+    background-image: url(${props.image});
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+  `}
 
   &::after {
     content: '';
@@ -364,7 +371,7 @@ const Projects: React.FC = () => {
                   />
                 </FloatingElements>
                 
-                <ProjectHeader>
+                <ProjectHeader image={project.image}>
                   {project.category === 'web' && '🌐'}
                   {project.category === 'mobile' && '📱'}
                   {project.category === 'desktop' && '💻'}
