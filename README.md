@@ -183,4 +183,4 @@ If you find this project helpful, consider:
 
 **Built with ❤️ using React and TypeScript**
 
-For more information, visit [jacksonkhuto.dev](https://jacksonkhuto.dev)
+For more information, visit [jacksonkhuto.dev](https://jacksonkhuto.dev)"# Force commit to trigger GitHub Actions"  
