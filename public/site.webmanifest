@@ -1,0 +1,21 @@
+{
+  "name": "Jackson Khuto - Portfolio",
+  "short_name": "Jackson Khuto",
+  "description": "Cyberpunk-themed portfolio showcasing innovative web development and UI/UX design",
+  "start_url": "/jackson_web_portfolio/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/jackson_web_portfolio/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/jackson_web_portfolio/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
