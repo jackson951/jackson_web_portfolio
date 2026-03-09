@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from './ThemeContext'
 import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi'
 import styled from 'styled-components'
@@ -36,11 +35,11 @@ const NavContent = styled.div`
   position: relative;
 `
 
-const Logo = styled(Link)`
+const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: 800;
   color: #fff;
-  text-decoration: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -84,7 +83,9 @@ const NavLinks = styled.div`
   }
 `
 
-const NavLink = styled(motion(Link))<{ active?: boolean }>`
+const NavLink = styled(motion.button)<{ active?: boolean }>`
+  background: transparent;
+  border: none;
   color: #94a3b8;
   text-decoration: none;
   font-weight: 500;
@@ -93,11 +94,10 @@ const NavLink = styled(motion(Link))<{ active?: boolean }>`
   font-family: 'Inter', sans-serif;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  border: 1px solid transparent;
+  cursor: pointer;
   
   &:hover {
     color: #fff;
-    border-color: rgba(255, 0, 255, 0.3);
     background: rgba(255, 0, 255, 0.1);
     box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
   }
@@ -178,7 +178,9 @@ const MobileMenu = styled(motion.div)`
   backdrop-filter: blur(10px);
 `
 
-const MobileNavLink = styled(motion(Link))<{ active?: boolean }>`
+const MobileNavLink = styled(motion.button)<{ active?: boolean }>`
+  background: transparent;
+  border: none;
   color: #94a3b8;
   text-decoration: none;
   font-size: 1.2rem;
@@ -187,6 +189,9 @@ const MobileNavLink = styled(motion(Link))<{ active?: boolean }>`
   border-bottom: 1px solid rgba(255, 0, 255, 0.2);
   transition: color 0.3s ease;
   font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
   
   &:hover {
     color: #fff;
@@ -223,12 +228,27 @@ const CyberGrid = styled.div`
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const location = useLocation()
+  const [activeSection, setActiveSection] = useState('home')
   const { theme, toggleTheme } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+      
+      // Determine active section based on scroll position
+      const sections = ['home', 'skills', 'projects', 'contact']
+      const currentScroll = window.scrollY
+      
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
     }
     
     window.addEventListener('scroll', handleScroll)
@@ -243,6 +263,15 @@ const Navbar: React.FC = () => {
     setIsMobileMenuOpen(false)
   }
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+      setActiveSection(sectionId)
+      closeMobileMenu()
+    }
+  }
+
   return (
     <>
       <NavbarContainer
@@ -253,38 +282,38 @@ const Navbar: React.FC = () => {
       >
         <CyberGrid />
         <NavContent>
-          <Logo to="/" onClick={closeMobileMenu}>
+          <Logo onClick={() => scrollToSection('home')}>
             <span>JXN</span>
           </Logo>
           
           <NavLinks>
             <NavLink 
-              to="/" 
-              active={location.pathname === '/'} 
+              active={activeSection === 'home'}
+              onClick={() => scrollToSection('home')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Home
             </NavLink>
             <NavLink 
-              to="/about" 
-              active={location.pathname === '/about'} 
+              active={activeSection === 'skills'}
+              onClick={() => scrollToSection('skills')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              About
+              Skills
             </NavLink>
             <NavLink 
-              to="/projects" 
-              active={location.pathname === '/projects'} 
+              active={activeSection === 'projects'}
+              onClick={() => scrollToSection('projects')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Archive
             </NavLink>
             <NavLink 
-              to="/contact" 
-              active={location.pathname === '/contact'} 
+              active={activeSection === 'contact'}
+              onClick={() => scrollToSection('contact')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -322,36 +351,32 @@ const Navbar: React.FC = () => {
             transition={{ duration: 0.3 }}
           >
             <MobileNavLink 
-              to="/" 
-              active={location.pathname === '/'} 
-              onClick={closeMobileMenu}
+              active={activeSection === 'home'}
+              onClick={() => scrollToSection('home')}
               whileHover={{ x: 10 }}
               whileTap={{ scale: 0.95 }}
             >
               Home
             </MobileNavLink>
             <MobileNavLink 
-              to="/about" 
-              active={location.pathname === '/about'} 
-              onClick={closeMobileMenu}
+              active={activeSection === 'skills'}
+              onClick={() => scrollToSection('skills')}
               whileHover={{ x: 10 }}
               whileTap={{ scale: 0.95 }}
             >
-              About
+              Skills
             </MobileNavLink>
             <MobileNavLink 
-              to="/projects" 
-              active={location.pathname === '/projects'} 
-              onClick={closeMobileMenu}
+              active={activeSection === 'projects'}
+              onClick={() => scrollToSection('projects')}
               whileHover={{ x: 10 }}
               whileTap={{ scale: 0.95 }}
             >
               Archive
             </MobileNavLink>
             <MobileNavLink 
-              to="/contact" 
-              active={location.pathname === '/contact'} 
-              onClick={closeMobileMenu}
+              active={activeSection === 'contact'}
+              onClick={() => scrollToSection('contact')}
               whileHover={{ x: 10 }}
               whileTap={{ scale: 0.95 }}
             >

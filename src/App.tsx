@@ -1,24 +1,22 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from './components/ThemeContext'
+import GlobalStyles from './styles/GlobalStyles'
 import Navbar from './components/Navbar'
-import Home from './pages/Home'
-import CyberpunkAbout from './pages/CyberpunkAbout'
-import ProjectsPage from './pages/ProjectsPage'
-import ContactPage from './pages/ContactPage'
-import './App.css'
+import Hero from './components/Hero'
+import Skills from './components/Skills'
+import Projects from './components/Projects'
+import CyberpunkContact from './components/CyberpunkContact'
 
-const App: React.FC = () => {
+function App() {
   return (
     <ThemeProvider>
+      <GlobalStyles />
       <div className="App">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<CyberpunkAbout />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Routes>
+        <Hero />
+        <Skills />
+        <Projects />
+        <CyberpunkContact />
       </div>
     </ThemeProvider>
   )

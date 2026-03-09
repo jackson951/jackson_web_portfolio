@@ -299,12 +299,37 @@ const CyberpunkContact: React.FC = () => {
     subject: '',
     message: ''
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    alert('Message sent successfully!')
-    setFormData({ name: '', email: '', subject: '', message: '' })
+    setIsSubmitting(true)
+    setSubmitMessage('')
+
+    try {
+      const response = await fetch('http://localhost:3001/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setSubmitMessage('Message sent successfully! 🎉')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        setSubmitMessage(`Failed to send message: ${result.message}`)
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setSubmitMessage('Network error. Please try again later.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -483,13 +508,33 @@ const CyberpunkContact: React.FC = () => {
             />
           </FormGroup>
 
+          {submitMessage && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              style={{
+                marginTop: '1rem',
+                padding: '1rem',
+                borderRadius: '8px',
+                background: submitMessage.includes('successfully') ? 'rgba(0, 245, 255, 0.1)' : 'rgba(255, 0, 255, 0.1)',
+                border: `1px solid ${submitMessage.includes('successfully') ? '#00f5ff' : '#ff00ff'}`,
+                color: submitMessage.includes('successfully') ? '#00f5ff' : '#ff00ff',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '0.9rem'
+              }}
+            >
+              {submitMessage}
+            </motion.div>
+          )}
+
           <SubmitButton 
             type="submit"
+            disabled={isSubmitting}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <FiSend style={{ marginRight: '0.5rem' }} />
-            Initiate Transmission
+            {isSubmitting ? 'Transmitting...' : 'Initiate Transmission'}
           </SubmitButton>
         </ContactForm>
       </Container>

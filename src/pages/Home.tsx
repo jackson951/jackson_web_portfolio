@@ -1,18 +1,9 @@
 import React from 'react'
-import Hero from '../components/Hero'
-import Skills from '../components/Skills'
-import Projects from '../components/Projects'
-import CyberpunkContact from '../components/CyberpunkContact'
 
+// This file is no longer needed since we're using a single-page layout
+// All components are now rendered directly in App.tsx
 const Home: React.FC = () => {
-  return (
-    <>
-      <Hero />
-      <Skills />
-      <Projects />
-      <CyberpunkContact />
-    </>
-  )
+  return null
 }
 
 export default Home
